@@ -15,8 +15,7 @@
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
     <kotlin.version>1.4.10</kotlin.version>
-    <arrow.version>0.11.0</arrow.version>
-    <slf4j.version>2.13.3</slf4j.version>
+    <slf4j.version>1.7.30</slf4j.version>
     <junit.version>5.7.0</junit.version>
     <jackson.version>2.11.2</jackson.version>
     <jolt.version>0.1.1</jolt.version>
@@ -28,9 +27,23 @@
     <sonar.coverage.jacoco.xmlReportPaths>${project.build.directory}/site/jacoco/jacoco.xml
     </sonar.coverage.jacoco.xmlReportPaths>
     <sonar.kotlin.detekt.reportPaths>${project.build.directory}/detekt.xml</sonar.kotlin.detekt.reportPaths>
-
+    <io.confluent.schema-registry.version>6.1.1</io.confluent.schema-registry.version>
+   <avro.version>1.10.2</avro.version>
+    <ksqldb.version>6.1.1</ksqldb.version>
   </properties>
 
+  <repositories>
+    <repository>
+      <id>confluent.io</id>
+      <name>confluent</name>
+      <url>https://packages.confluent.io/maven/</url>
+    </repository>
+    <repository>
+      <id>central</id>
+      <name>maven central</name>
+      <url>https://repo.maven.apache.org/maven2/</url>
+    </repository>
+  </repositories>
 
 
   <dependencies>
@@ -51,31 +64,77 @@
       <version>1.3.9</version>
     </dependency>
 
-    <!-- SAP library -->
-    <dependency>
-      <groupId>com.sap</groupId>
-      <artifactId>jco</artifactId>
-      <version>3.1.2</version>
-    </dependency>
-    <dependency>
-      <groupId>com.sap</groupId>
-      <artifactId>idoc</artifactId>
-      <version>3.1.0</version>
-    </dependency>
-
     <!-- Kafka library -->
     <dependency>
       <groupId>org.apache.kafka</groupId>
       <artifactId>kafka-clients</artifactId>
       <version>2.6.0</version>
     </dependency>
-
-    <!-- MQS -->
     <dependency>
-      <groupId>com.ibm.mq</groupId>
-      <artifactId>com.ibm.mq.allclient</artifactId>
-      <version>9.1.0.5</version>
-      <!-- important: do NOT go up to 9.2.0.0, it is broken -->
+      <groupId>io.confluent</groupId>
+      <artifactId>kafka-avro-serializer</artifactId>
+      <version>${io.confluent.schema-registry.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.confluent</groupId>
+      <artifactId>kafka-streams-avro-serde</artifactId>
+      <version>${io.confluent.schema-registry.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.avro</groupId>
+      <artifactId>avro</artifactId>
+      <version>${avro.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.confluent.ksql</groupId>
+      <artifactId>ksqldb-api-client</artifactId>
+      <version>${ksqldb.version}</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>slf4j-log4j12</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>confluent-log4j</artifactId>
+          <groupId>io.confluent</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>slf4j-log4j12</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>confluent-log4j</artifactId>
+          <groupId>io.confluent</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>slf4j-log4j12</artifactId>
+          <groupId>org.slf4j</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>confluent-log4j</artifactId>
+          <groupId>io.confluent</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>confluent-log4j</artifactId>
+          <groupId>io.confluent</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>confluent-log4j</artifactId>
+          <groupId>io.confluent</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>confluent-log4j</artifactId>
+          <groupId>io.confluent</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>confluent-log4j</artifactId>
+          <groupId>io.confluent</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>confluent-log4j</artifactId>
+          <groupId>io.confluent</groupId>
+        </exclusion>
+      </exclusions>
     </dependency>
 
     <!-- Jackson JSON serialization/deserialization -->
@@ -98,41 +157,18 @@
     <dependency>
       <groupId>com.fasterxml.jackson.datatype</groupId>
       <artifactId>jackson-datatype-jsr310</artifactId>
-      <version>${jackson.version}</version>
-    </dependency>
+      <version>${jackson.version}</version></dependency>
 
-    <!-- JOLT -->
-    <dependency>
-      <groupId>com.bazaarvoice.jolt</groupId>
-      <artifactId>jolt-core</artifactId>
-      <version>${jolt.version}</version>
-    </dependency>
-
-    <!-- Arrow Kt Functional Library -->
-    <dependency>
-      <groupId>io.arrow-kt</groupId>
-      <artifactId>arrow-core</artifactId>
-      <version>${arrow.version}</version>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/io.arrow-kt/arrow-fx -->
-    <dependency>
-      <groupId>io.arrow-kt</groupId>
-      <artifactId>arrow-fx</artifactId>
-      <version>${arrow.version}</version>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/com.typesafe/config -->
+      <!-- https://mvnrepository.com/artifact/com.typesafe/config -->
     <dependency>
       <groupId>com.typesafe</groupId>
       <artifactId>config</artifactId>
       <version>1.4.0</version>
     </dependency>
 
-    <!-- Logging -->
     <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-slf4j-impl</artifactId>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
       <version>${slf4j.version}</version>
     </dependency>
 
@@ -222,7 +258,7 @@
   </dependencies>
 
   <build>
-    <finalName>jagathe</finalName>
+    <finalName>udacity</finalName>
     <resources>
       <resource>
         <directory>src/main/resources</directory>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Basic default logging configuration -->
+<Configuration shutdownHook="disable">
+    <Appenders>
+        <Console name="Console">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %c{36} - %msg%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="warn">
+            <AppenderRef ref="Console"/>
+        </Root>
+        <Logger name="org.chicago.cta" level="info"/>
+        <Logger name="org.apache.kafka" level="warn"/>
+    </Loggers>
+</Configuration>
