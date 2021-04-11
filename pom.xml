@@ -21,7 +21,7 @@
         <jackson.version>2.11.2</jackson.version>
         <jolt.version>0.1.1</jolt.version>
 
-        <binaryFolder>${basedir}/target/cta</binaryFolder>
+        <binaryFolder>${basedir}/target/</binaryFolder>
         <sonar.language>kotlin</sonar.language>
         <sonar.sources>src/main/kotlin</sonar.sources>
         <sonar.tests>src/test/kotlin</sonar.tests>
@@ -383,7 +383,7 @@
                             <outputDirectory>${binaryFolder}</outputDirectory>
                             <archive>
                                 <manifest>
-                                    <mainClass>org.chicago.cta.AppKt</mainClass>
+                                    <mainClass>org.chicago.cta.producers.SimulationKt</mainClass>
                                 </manifest>
                             </archive>
                             <descriptorRefs>
