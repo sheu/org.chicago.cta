@@ -80,14 +80,14 @@ class ProducerLine(val color: Color,
         val newStepSize = if (stepSize > 0) stepSize else (numStations * numDirections) / numTrains
         var nextIndex: Int
         return if (bDirection) {
-            nextIndex = currentIndex + stepSize
+            nextIndex = currentIndex + newStepSize
             if (nextIndex < numStations) {
                 nextIndex to true
             } else {
                 (numStations - (nextIndex % numStations)) to false
             }
         } else {
-            nextIndex = currentIndex - stepSize
+            nextIndex = currentIndex - newStepSize
             if (nextIndex > 0) {
                 nextIndex to false
             } else {

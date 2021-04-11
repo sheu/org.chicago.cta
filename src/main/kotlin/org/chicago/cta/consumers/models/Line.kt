@@ -25,7 +25,7 @@ class Line constructor(val color: String, var stationIdToStationMap: MutableMap<
 
     fun handleStation(lineToColorMap: Map<String, String>) {
         if (lineToColorMap["line"] != color) return
-        stationIdToStationMap[lineToColorMap["station_id"] as Int] = fromMessage(lineToColorMap)
+        stationIdToStationMap[lineToColorMap["station_id"]!!.toInt()] = fromMessage(lineToColorMap)
     }
 
     fun handleArrival(consumerRecord: ConsumerRecord<Any?, Any?>) {
